@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="coffee">
+        <item >Americano</item>
+        <item >Mocha</item>
+        <item >Latte</item>
+        <item >Espresso</item>
+        <item >Cappuccino</item>
+
+    </string-array>
+
+
+</resources>

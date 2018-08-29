@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="250dp"
+    android:layout_height="200dp"
+    android:background="#eeeeee"
+    tools:context="com.example.lg01.iot_controller.PopupActivity">
+
+    <!-- 타이틀바 -->
+    <LinearLayout
+        android:id="@+id/popup_title"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="옵션을 선택해주세요"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <!-- //end 타이틀바 -->
+
+    <!-- Notice -->
+    <LinearLayout
+        android:layout_below="@+id/popup_title"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/popup_list_layout"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textView_behavior_modify"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="행동패턴 수정"
+            android:onClick="mOnClickModify"
+            android:textColor="#000000" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#000000" />
+
+        <TextView
+            android:id="@+id/textView_behavior_delete"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="mOnClickDelete"
+            android:text="행동패턴 삭제"
+            android:textColor="#000000" />
+    </LinearLayout>
+    <!-- Notice -->
+
+    <!-- 닫기 버튼 -->
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="7dp"
+            android:background="#00000000"
+            android:onClick="mOnClose"
+            android:text="취소"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:textSize="15dp" />
+    </LinearLayout>
+    <!--// 닫기 버튼 -->
+</RelativeLayout>
+

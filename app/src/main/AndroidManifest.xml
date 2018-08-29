@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.lg01.iot_controller">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="Home IoT Controller"
+        android:roundIcon="@drawable/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".MainActivity">
+
+        </activity>
+
+        <activity android:name=".BehaviorlistActivity">
+
+        </activity>
+
+        <activity android:name=".ControliotActivity">
+
+        </activity>
+
+        <activity android:name=".SignupActivity">
+
+        </activity>
+
+        <activity android:name=".PopupActivity"
+            android:theme="@android:style/Theme.Dialog">
+
+        </activity>
+
+        <activity android:name=".BehaviorMdfTVActivity">
+
+        </activity>
+
+        <activity android:name=".BehaviorMdfBoilerActivity">
+
+        </activity>
+
+        <activity android:name=".BehaviorMdfCoffeeActivity">
+
+        </activity>
+
+        <activity android:name=".BehaviorAddPopupActivity"
+            android:theme="@android:style/Theme.Dialog">
+
+        </activity>
+
+        <activity android:name=".BehaviorAddTVActivity">
+
+        </activity>
+        <activity android:name=".BehaviorAddBoilerActivity">
+
+        </activity>
+        <activity android:name=".BehaviorAddCoffeeActivity">
+
+        </activity>
+    </application>
+</manifest>
