@@ -65,7 +65,7 @@ public class BehaviorAddPopupActivity extends Activity {
         Intent intent = new Intent(BehaviorAddPopupActivity.this, BehaviorAddTVActivity.class);
         startActivity(intent);
         //DB 삭제가 끝나면 이전 BehaviorlistActivity를 종료하고
-        BehaviorlistActivity endActivity = (BehaviorlistActivity) BehaviorlistActivity.Behaviorlist;
+        TVBehaviorlistActivity endActivity = (TVBehaviorlistActivity) TVBehaviorlistActivity.Behaviorlist;
         endActivity.finish();
         finish();
     }
@@ -74,7 +74,7 @@ public class BehaviorAddPopupActivity extends Activity {
         Intent intent = new Intent(BehaviorAddPopupActivity.this,BehaviorAddBoilerActivity.class);
         startActivity(intent);
         //DB 삭제가 끝나면 이전 BehaviorlistActivity를 종료하고
-        BehaviorlistActivity endActivity=(BehaviorlistActivity)BehaviorlistActivity.Behaviorlist;
+        BoilerBehaviorlistActivity endActivity=(BoilerBehaviorlistActivity)BoilerBehaviorlistActivity.Behaviorlist;
         endActivity.finish();
         finish();
     }
@@ -83,7 +83,7 @@ public class BehaviorAddPopupActivity extends Activity {
         Intent intent = new Intent(BehaviorAddPopupActivity.this,BehaviorAddCoffeeActivity.class);
         startActivity(intent);
         //DB 삭제가 끝나면 이전 BehaviorlistActivity를 종료하고
-        BehaviorlistActivity endActivity=(BehaviorlistActivity)BehaviorlistActivity.Behaviorlist;
+        CMBehaviorlistActivity endActivity=(CMBehaviorlistActivity)CMBehaviorlistActivity.Behaviorlist;
         endActivity.finish();
         finish();
     }

@@ -21,10 +21,6 @@
 
         </activity>
 
-        <activity android:name=".BehaviorlistActivity">
-
-        </activity>
-
         <activity android:name=".ControliotActivity">
 
         </activity>
@@ -37,6 +33,20 @@
             android:theme="@android:style/Theme.Dialog">
 
         </activity>
+
+        <activity android:name=".BoilerBehaviorlistActivity">
+
+        </activity>
+
+        <activity android:name=".CMBehaviorlistActivity">
+
+        </activity>
+        <activity android:name=".TVBehaviorlistActivity">
+
+        </activity>
+
+
+
 
         <activity android:name=".BehaviorMdfTVActivity">
 
@@ -55,6 +65,10 @@
 
         </activity>
 
+        <activity android:name=".PopupDeviceActivity"
+            android:theme="@android:style/Theme.Dialog">
+
+        </activity>
         <activity android:name=".BehaviorAddTVActivity">
 
         </activity>

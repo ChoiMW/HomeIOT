@@ -76,7 +76,7 @@
         </LinearLayout>
 
         <ScrollView
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:layout_width="match_parent"
             android:layout_height="0dp">
 
@@ -155,12 +155,12 @@
 
 
         <TextView
-            android:id="@+id/textView_TV"
+            android:id="@+id/textView_Airconditioner"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.7"
             android:gravity="center"
-            android:text="TV"
+            android:text="Air Conditioner"
             android:textColor="@android:color/black"
             android:textSize="10pt"
             android:textStyle="bold" />
@@ -173,10 +173,11 @@
 
 
             <ToggleButton
-                android:id="@+id/toggleButton_tv"
+                android:id="@+id/toggleButton_Airconditioner"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_margin="10dp"
                 android:checked="true"
                 android:textOff="꺼짐"
                 android:textOn="켜짐" />
@@ -202,82 +203,35 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Channel"
+                        android:text="Temperature"
                         android:textColor="@android:color/black" />
 
                     <ImageButton
-                        android:id="@+id/button_channel_up"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/button_temperature_up"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClick="mOnClickChannelUp"
+                        android:onClick="mOnClickTemperaturelUp"
                         app:srcCompat="@android:drawable/arrow_up_float" />
 
                     <EditText
-                        android:id="@+id/editText_channel"
+                        android:id="@+id/editText_temperature"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
                         android:gravity="center"
-                        android:hint="channel"
+                        android:hint="temperature"
                         android:inputType="number"
                         android:text="0" />
 
                     <ImageButton
-                        android:id="@+id/channel_down"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/temperature_down"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClick="mOnClickChannelDown"
+                        android:onClick="mOnClickTemperatureDown"
                         app:srcCompat="@android:drawable/arrow_down_float" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Volume"
-                        android:textColor="@android:color/black" />
-
-                    <ImageButton
-                        android:onClick="mOnClickVolumeUp"
-                        android:id="@+id/button_volume_up"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/arrow_up_float" />
-
-                    <EditText
-                        android:id="@+id/editText_volume"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:gravity="center"
-                        android:hint="volume"
-                        android:inputType="number"
-                        android:text="0" />
-
-                    <ImageButton
-                        android:id="@+id/button_volume_down"
-                        android:onClick="mOnClickVolumeDown"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/arrow_down_float" />
-
                 </LinearLayout>
 
             </LinearLayout>

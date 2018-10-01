@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,14 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,16 +39,18 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BehaviorlistActivity extends AppCompatActivity {
+public class TVBehaviorlistActivity extends AppCompatActivity {
 
     private static String TAG ="iot_controller_BehaviorlistActivity";
 
     private static final String TAG_JSON="arr";
-    private static final String TAG_PNAME ="pname";
-    private static final String TAG_DNAME ="dname";
-    private static final String TAG_DAYS ="days";
-    private static final String TAG_SWITCH="behavior";
-    private static final String TAG_TIME="time";
+    private static final String TAG_PNAME ="Name";
+    private static final String TAG_DAYS ="DayofWeek";
+    private static final String TAG_POWER="Power";
+    private static final String TAG_SWITCH="Switch";
+    private static final String TAG_TIME="Time";
+    private static final String TAG_CHANNEL="Channel";
+    private static final String TAG_VOLUME="Volume";
 
     protected Handler handle=new Handler();
 
@@ -77,8 +75,7 @@ public class BehaviorlistActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add:
-                // TODO : process the click event for action_search item.
-                Intent intent = new Intent(BehaviorlistActivity.this,BehaviorAddPopupActivity.class);
+                Intent intent = new Intent(TVBehaviorlistActivity.this,BehaviorAddTVActivity.class);
                 startActivity(intent);
                 return true ;
 
@@ -94,15 +91,15 @@ public class BehaviorlistActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Behaviorlist=BehaviorlistActivity.this;
-        setContentView(R.layout.activity_behaviorlist);
+        Behaviorlist=TVBehaviorlistActivity.this;
+        setContentView(R.layout.activity_newbehaviorlist);
         //리스트 목록
         behavior_list = new ArrayList<MyItem>();
         mTextViewResult = (TextView)findViewById(R.id.textView_main_result);
         MyList = (ListView) findViewById(R.id.list_behaviorlist);
         GetData task = new GetData();
         String getjson=getString(R.string.db_url);
-        getjson+="getjson.php";
+        getjson+="TV_json.php";
         task.execute(getjson);
     }
 
@@ -113,7 +110,7 @@ public class BehaviorlistActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(BehaviorlistActivity.this,
+            progressDialog = ProgressDialog.show(TVBehaviorlistActivity.this,
                     "Please Wait", null, true, true);
         }
         @Override
@@ -196,12 +193,14 @@ public class BehaviorlistActivity extends AppCompatActivity {
                 JSONObject item = jsonArray.getJSONObject(i);
 
                 String pname = item.getString(TAG_PNAME);
-                String dname = item.getString(TAG_DNAME);
-                String days = item.getString(TAG_DAYS);
-                int behavior_switch = item.getInt(TAG_SWITCH);
+                int days = item.getInt(TAG_DAYS);
+                int Switch = item.getInt(TAG_SWITCH);
+                int power = item.getInt(TAG_POWER);
                 String time = item.getString(TAG_TIME);
+                String channel = item.getString(TAG_CHANNEL);
+                String volume = item.getString(TAG_VOLUME);
 
-                MyItem m_i = new MyItem(pname,dname,days,behavior_switch,time);
+                MyItem m_i = new MyItem(pname,days,power,time,channel,volume,Switch);
                 behavior_list.add(m_i);
 
             }
@@ -223,18 +222,22 @@ public class BehaviorlistActivity extends AppCompatActivity {
     }
 
     class MyItem{
-        MyItem(String apName,String adName,String aDays,int abehavior_switch,String aTime){
-            pName=apName;
-            dName=adName;
+        MyItem(String aPname,int aDays,int aPower,String aTime,String aChannel,String aVolume,int aSwtich){
+            pName=aPname;
+            Volume=aVolume;
             Days=aDays;
-            behavior_switches=abehavior_switch;
+            behavior_switches=aSwtich;
+            Power=aPower;
             Time=aTime;
+            Channel=aChannel;
         }
         String pName;
-        String dName;
-        String Days;
+        int Days;
         int behavior_switches;
+        int Power;
         String Time;
+        String Channel;
+        String Volume;
     }
 
     // 어댑터 클래스
@@ -273,11 +276,14 @@ public class BehaviorlistActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent = new Intent(BehaviorlistActivity.this, PopupActivity.class);
+                    Intent intent = new Intent(TVBehaviorlistActivity.this, PopupActivity.class);
                     intent.putExtra("Behavior_pname", arSrc.get(pos).pName);
-                    intent.putExtra("Behavior_dname", arSrc.get(pos).dName);
+                    intent.putExtra("Behavior_dname","TV");
+                    intent.putExtra("Behavior_channel", arSrc.get(pos).Channel);
+                    intent.putExtra("Behavior_volume", arSrc.get(pos).Volume);
                     intent.putExtra("Behavior_days", arSrc.get(pos).Days);
                     intent.putExtra("Behavior_switch", arSrc.get(pos).behavior_switches);
+                    intent.putExtra("Behavior_power", arSrc.get(pos).Power);
                     intent.putExtra("Behavior_time", arSrc.get(pos).Time);
                     startActivity(intent);
 
@@ -289,12 +295,8 @@ public class BehaviorlistActivity extends AppCompatActivity {
             txt_pname.setText(arSrc.get(position).pName);
             txt_pname.setOnClickListener(mOnClickListener);
 
-            TextView txt_dname = (TextView) convertView.findViewById(R.id.text_device_name);
-            txt_dname.setText(arSrc.get(position).dName);
-            txt_dname.setOnClickListener(mOnClickListener);
-
             TextView txt_day = (TextView) convertView.findViewById(R.id.text_days);
-            txt_day.setText(arSrc.get(position).Days);
+            txt_day.setText(String.valueOf(arSrc.get(position).Days));
             txt_day.setOnClickListener(mOnClickListener);
 
             final Switch switch_b = (Switch) convertView.findViewById(R.id.switch_behavior);
@@ -312,7 +314,6 @@ public class BehaviorlistActivity extends AppCompatActivity {
             switch_b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    // TODO Auto-generated method stub
 
                     Message msg = null;
                     switch_thread mythread;
@@ -384,7 +385,6 @@ public class BehaviorlistActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if (result.equals("Success")) {
-                            //Toast.makeText(BehaviorlistActivity.this, "result", Toast.LENGTH_SHORT).show();
                             handle.sendEmptyMessage(0);
                         }
                     }

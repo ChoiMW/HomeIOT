@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         button_behaviorlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,BehaviorlistActivity.class);
+                Intent intent = new Intent(MainActivity.this,PopupDeviceActivity.class);
                 startActivity(intent);
             }
         });

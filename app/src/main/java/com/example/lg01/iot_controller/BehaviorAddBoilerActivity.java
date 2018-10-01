@@ -26,7 +26,7 @@ public class BehaviorAddBoilerActivity extends AppCompatActivity{
 
 
     protected String behavior_new_pname;
-    protected String behavior_new_days;
+    protected int behavior_new_days;
     protected String behavior_new_time;
     protected String behavior_new_power;
     protected String behavior_new_temperature;
@@ -45,7 +45,6 @@ public class BehaviorAddBoilerActivity extends AppCompatActivity{
     //사용자가 어떠한 작업을해서 완료 버튼을 누른다.
     public void mOnClickMdfComplete(View v){
         CheckBox checkBox;
-        behavior_new_days="";
 
 
         EditText editText_pname= (EditText)findViewById(R.id.editText_behavior_pname);
@@ -72,53 +71,46 @@ public class BehaviorAddBoilerActivity extends AppCompatActivity{
 
 
 
+        mThread myThread = new mThread();
+
         checkBox=(CheckBox)findViewById(R.id.checkBox_Monday);
         if(checkBox.isChecked()){
-            behavior_new_days+="Mon";
+            behavior_new_days= 1;
+            myThread.start();
         }
+
         checkBox=(CheckBox)findViewById(R.id.checkBox_Tuesday);
         if(checkBox.isChecked()){
-            if(behavior_new_days!=""){
-                behavior_new_days+=",";
-            }
-            behavior_new_days+="Tues";
+            behavior_new_days= 2;
+            myThread.start();
         }
+
         checkBox=(CheckBox)findViewById(R.id.checkBox_Wednesday);
         if(checkBox.isChecked()){
-            if(behavior_new_days!=""){
-                behavior_new_days+=",";
-            }
-            behavior_new_days+="Wed";
+            behavior_new_days= 3;
+            myThread.start();
         }
         checkBox=(CheckBox)findViewById(R.id.checkBox_Thursday);
         if(checkBox.isChecked()){
-            if(behavior_new_days!=""){
-                behavior_new_days+=",";
-            }
-            behavior_new_days+="Thurs";
+            behavior_new_days= 4;
+            myThread.start();
         }
         checkBox=(CheckBox)findViewById(R.id.checkBox_Friday);
         if(checkBox.isChecked()){
-            if(behavior_new_days!=""){
-                behavior_new_days+=",";
-            }
-            behavior_new_days+="Fri";
+            behavior_new_days= 5;
+            myThread.start();
         }
         checkBox=(CheckBox)findViewById(R.id.checkBox_Saturday);
         if(checkBox.isChecked()){
-            if(behavior_new_days!=""){
-                behavior_new_days+=",";
-            }
-            behavior_new_days+="Sat";
+            behavior_new_days= 6;
+            myThread.start();
         }
         checkBox=(CheckBox)findViewById(R.id.checkBox_Sunday);
         if(checkBox.isChecked()){
-            if(behavior_new_days!=""){
-                behavior_new_days+=",";
-            }
-            behavior_new_days+="Sun";
+            behavior_new_days= 0;
+            myThread.start();
         }
-        if(behavior_new_days.equals("")){
+        if(behavior_new_days==8){
             Toast.makeText(this, "Please Select Days", Toast.LENGTH_SHORT).show();
         }
         else if(behavior_new_pname.equals("")){
@@ -127,11 +119,7 @@ public class BehaviorAddBoilerActivity extends AppCompatActivity{
         else if(behavior_new_time.equals("")){
             Toast.makeText(this, "Please Input Time", Toast.LENGTH_SHORT).show();
         }
-        else{
-            mThread myThread = new mThread();
-            myThread.setDaemon(true);
-            myThread.start();
-        }
+
 
     }
 
@@ -174,7 +162,7 @@ public class BehaviorAddBoilerActivity extends AppCompatActivity{
                 conn.setRequestProperty("Cache-Control", "no-cache");
                 String postData = URLEncoder.encode("newpName", "UTF-8") + "=" + URLEncoder.encode(behavior_new_pname, "UTF-8");
                 postData += "&" + URLEncoder.encode("newTime", "UTF-8") + "=" + URLEncoder.encode(behavior_new_time, "UTF-8");
-                postData += "&" + URLEncoder.encode("newDays", "UTF-8") + "=" + URLEncoder.encode(behavior_new_days, "UTF-8");
+                postData += "&" + URLEncoder.encode("newDays", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(behavior_new_days), "UTF-8");
                 postData += "&" + URLEncoder.encode("power", "UTF-8") + "=" + URLEncoder.encode(behavior_new_power, "UTF-8");
                 postData += "&" + URLEncoder.encode("tmp", "UTF-8") + "=" + URLEncoder.encode(behavior_new_temperature, "UTF-8");
                 OutputStream outputStream = conn.getOutputStream();
@@ -191,14 +179,27 @@ public class BehaviorAddBoilerActivity extends AppCompatActivity{
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-
+                        /*
                         Toast.makeText(BehaviorAddBoilerActivity.this,result,Toast.LENGTH_LONG).show();
                         if (result.equals("Add Success")) {
                             //이전 BehaviorlistActivity를 종료하고
-                            BehaviorlistActivity endActivity=(BehaviorlistActivity)BehaviorlistActivity.Behaviorlist;
+                            BoilerBehaviorlistActivity endActivity=(BoilerBehaviorlistActivity)BoilerBehaviorlistActivity.Behaviorlist;
                             endActivity.finish();
                             // 다시 실행한다.
-                            Intent intent = new Intent(BehaviorAddBoilerActivity.this,BehaviorlistActivity.class);
+                            Intent intent = new Intent(BehaviorAddBoilerActivity.this,BoilerBehaviorlistActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        */
+
+                        if (result.equals("#!/usr/bin/phpAdd Success")) {
+                            Toast.makeText(BehaviorAddBoilerActivity.this,"Add Success",Toast.LENGTH_LONG).show();
+
+                            //이전 BehaviorlistActivity를 종료하고
+                            BoilerBehaviorlistActivity endActivity=(BoilerBehaviorlistActivity)BoilerBehaviorlistActivity.Behaviorlist;
+                            endActivity.finish();
+                            // 다시 실행한다.
+                            Intent intent = new Intent(BehaviorAddBoilerActivity.this,BoilerBehaviorlistActivity.class);
                             startActivity(intent);
                             finish();
                         }

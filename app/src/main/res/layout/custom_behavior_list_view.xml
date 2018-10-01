@@ -10,14 +10,14 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="7"
+            android:layout_weight="5"
             android:orientation="vertical">
 
                 <TextView
-                    android:paddingLeft="5dp"
                     android:id="@+id/text_behavior_name"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:paddingLeft="5dp"
                     android:text="text_behavior_name"
                     android:textColor="#000000"
                     android:textSize="30sp" />
@@ -29,30 +29,21 @@
 
                         <TextView
                             android:id="@+id/text_days"
-                            android:layout_height="match_parent"
                             android:layout_width="0dp"
-                            android:text="text_days"
-                            android:layout_weight="4"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
                             android:gravity="center_vertical"
                             android:paddingLeft="5dp"
+                            android:text="text_days"
                             android:textColor="#000000"
                             android:textSize="13sp" />
 
                         <TextView
-                            android:id="@+id/text_device_name"
-                            android:layout_weight="2"
-                            android:layout_width="0dp"
-                            android:gravity="center_vertical"
-                            android:layout_height="match_parent"
-                            android:text="text_device_name"
-                            android:textColor="#000000"
-                            android:textSize="13sp" />
-                        <TextView
                             android:id="@+id/text_Time"
-                            android:layout_weight="1"
                             android:layout_width="0dp"
-                            android:gravity="center_vertical"
                             android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical"
                             android:text="text_Time"
                             android:textColor="#000000"
                             android:textSize="13sp" />
@@ -62,13 +53,15 @@
         </LinearLayout>
 
         <Switch
-            android:layout_weight="1"
-            android:padding="5dp"
-            android:gravity="center"
             android:id="@+id/switch_behavior"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
-             />
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:padding="5dp"
+            android:switchTextAppearance="@style/TextAppearance.AppCompat"
+            android:textAlignment="center" />
 
 
 </LinearLayout>

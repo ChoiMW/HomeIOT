@@ -31,9 +31,15 @@ public class PopupActivity extends Activity {
 
     protected String behavior_pname;
     protected String behavior_dname;
-    protected String behavior_days;
+    protected int behavior_days;
+    protected int behavior_power;
     protected boolean behavior_switch;
     protected String behavior_time;
+    protected int behavior_temp;
+    protected String behavior_type;
+    protected String behavior_channel;
+    protected String behavior_volume;
+
 
     private Handler handler=new Handler();
 
@@ -50,10 +56,24 @@ public class PopupActivity extends Activity {
         Intent intent = getIntent();
         behavior_pname = intent.getStringExtra("Behavior_pname");
         behavior_dname = intent.getStringExtra("Behavior_dname");
-        behavior_days = intent.getStringExtra("Behavior_days");
+        behavior_days = intent.getIntExtra("Behavior_days",8);
+        behavior_power = intent.getIntExtra("Behavior_power",-1);
         behavior_switch = intent.getBooleanExtra("Behavior_switch",false);
         behavior_time = intent.getStringExtra("Behavior_time");
+        if(behavior_dname.equals("TV")){
+            behavior_channel = intent.getStringExtra("Behavior_channel");
+            behavior_volume = intent.getStringExtra("Behavior_volume");
+        }
+        else if(behavior_dname.equals("Boiler")){
+            behavior_temp = intent.getIntExtra("Behavior_temp",-1);
 
+        }
+        else if(behavior_dname.equals("CM")){
+            behavior_type = intent.getStringExtra("Behavior_type");
+        }
+        else{
+            //에어컨일경우
+        }
 
     }
     //이하  http://ghj1001020.tistory.com/9
@@ -75,20 +95,33 @@ public class PopupActivity extends Activity {
 
     public void mOnClickModify(View v){
         Intent intent= new Intent();
-        if(behavior_dname.equals("TV")){
-            intent = new Intent(PopupActivity.this,BehaviorMdfTVActivity.class);
-        }
-        else if(behavior_dname.equals("Boiler")){
-            intent = new Intent(PopupActivity.this,BehaviorMdfBoilerActivity.class);
-        }
-        else{
-            intent = new Intent(PopupActivity.this,BehaviorMdfCoffeeActivity.class);
-        }
         intent.putExtra("Behavior_pname", behavior_pname);
         intent.putExtra("Behavior_dname", behavior_dname);
         intent.putExtra("Behavior_days", behavior_days);
+        intent.putExtra("Behavior_power", behavior_power);
         intent.putExtra("Behavior_switch", behavior_switch);
         intent.putExtra("Behavior_time", behavior_time);
+
+        if(behavior_dname.equals("TV")){
+            intent = new Intent(PopupActivity.this,BehaviorMdfTVActivity.class);
+            intent.putExtra("Behavior_channel", behavior_channel);
+            intent.putExtra("Behavior_volume", behavior_volume);
+
+        }
+        else if(behavior_dname.equals("Boiler")){
+            intent = new Intent(PopupActivity.this,BehaviorMdfBoilerActivity.class);
+            intent.putExtra("Behavior_temp", behavior_temp);
+
+        }
+        else if(behavior_dname.equals("CM")){
+            intent = new Intent(PopupActivity.this,BehaviorMdfCoffeeActivity.class);
+            intent.putExtra("Behavior_type", behavior_type);
+
+        }
+        else{
+            //에어컨일경우
+        }
+
         startActivity(intent);
         finish();
 
@@ -109,8 +142,19 @@ public class PopupActivity extends Activity {
             try {
 
                 String behaviorDlt_url=getString(R.string.db_url);
-                behaviorDlt_url+="behaviorDlt.php";
-                //URL url = new URL("http://222.110.210.122/login.php");
+                if(behavior_dname.equals("TV")){
+                    behaviorDlt_url+="TV_behaviorDlt.php";
+                }
+                else if(behavior_dname.equals("Boiler")){
+                    behaviorDlt_url+="Boiler_behaviorDlt.php";
+                }
+                else if(behavior_dname.equals("CM")){
+                    behaviorDlt_url+="CM_behaviorDlt.php";
+                }
+                else{
+                    //에어컨일경우
+                    //behaviorDlt_url+="behaviorDlt.php";
+                }
                 URL url = new URL(behaviorDlt_url);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setConnectTimeout(20000);
@@ -121,6 +165,8 @@ public class PopupActivity extends Activity {
                 conn.setRequestProperty("Connection", "Keep-Alive");
                 conn.setRequestProperty("Cache-Control", "no-cache");
                 String postData = URLEncoder.encode("Namea", "UTF-8") + "=" + URLEncoder.encode(behavior_pname, "UTF-8");
+                postData += "&" + URLEncoder.encode("Day", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(behavior_days), "UTF-8");
+                postData += "&" + URLEncoder.encode("Time", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(behavior_time), "UTF-8");
                 OutputStream outputStream = conn.getOutputStream();
                 outputStream.write(postData.getBytes());
                 outputStream.flush();
@@ -139,12 +185,41 @@ public class PopupActivity extends Activity {
                         Toast.makeText(PopupActivity.this,"Delete "+result,Toast.LENGTH_LONG).show();
                         if (result.equals("Success")) {
                             // 다시 실행한다.
-                            Intent intent = new Intent(PopupActivity.this,BehaviorlistActivity.class);
-                            startActivity(intent);
-                            //DB 삭제가 끝나면 이전 BehaviorlistActivity를 종료하고
-                            BehaviorlistActivity endActivity=(BehaviorlistActivity)BehaviorlistActivity.Behaviorlist;
-                            endActivity.finish();
-                            finish();
+                            if(behavior_dname.equals("TV")){
+                                Intent intent = new Intent(PopupActivity.this,TVBehaviorlistActivity.class);
+                                startActivity(intent);
+                                //DB 삭제가 끝나면 이전 BehaviorlistActivity를 종료하고
+                                TVBehaviorlistActivity endActivity=(TVBehaviorlistActivity)TVBehaviorlistActivity.Behaviorlist;
+                                endActivity.finish();
+                                finish();
+                            }
+                            else if(behavior_dname.equals("Boiler")){
+                                Intent intent = new Intent(PopupActivity.this,BoilerBehaviorlistActivity.class);
+                                startActivity(intent);
+                                //DB 삭제가 끝나면 이전 BehaviorlistActivity를 종료하고
+                                BoilerBehaviorlistActivity endActivity=(BoilerBehaviorlistActivity)BoilerBehaviorlistActivity.Behaviorlist;
+                                endActivity.finish();
+                                finish();
+                            }
+                            else if(behavior_dname.equals("CM")){
+                                Intent intent = new Intent(PopupActivity.this,CMBehaviorlistActivity.class);
+                                startActivity(intent);
+                                //DB 삭제가 끝나면 이전 BehaviorlistActivity를 종료하고
+                                CMBehaviorlistActivity endActivity=(CMBehaviorlistActivity)CMBehaviorlistActivity.Behaviorlist;
+                                endActivity.finish();
+                                finish();
+                            }
+                            else{
+                                // 에어컨일경우
+                                /*
+                                Intent intent = new Intent(PopupActivity.this,BehaviorlistActivity.class);
+                                startActivity(intent);
+                                //DB 삭제가 끝나면 이전 BehaviorlistActivity를 종료하고
+                                BehaviorlistActivity endActivity=(BehaviorlistActivity)BehaviorlistActivity.Behaviorlist;
+                                endActivity.finish();
+                                finish();
+                                */
+                            }
                         }
 
                     }
