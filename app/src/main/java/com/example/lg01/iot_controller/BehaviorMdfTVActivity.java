@@ -33,7 +33,7 @@ public class BehaviorMdfTVActivity extends AppCompatActivity{
     protected String behavior_current_time;
     protected String behavior_current_channel;
     protected String behavior_current_volume;
-    protected String behavior_current_power;
+    protected int behavior_current_power;
 
     protected String behavior_new_pname;
     protected int behavior_new_days;
@@ -50,7 +50,7 @@ public class BehaviorMdfTVActivity extends AppCompatActivity{
         //이전 액티비티에서 인텐트로 데이터 가져오기
         Intent intent = getIntent();
         CheckBox checkBox = null;
-        ToggleButton toggle_power=(ToggleButton)findViewById(R.id.toggleButton_tv);
+        ToggleButton toggle_power=(ToggleButton)findViewById(R.id.toggleButton_boiler);
 
         /*
         toggle_power.setOnCheckedChangeListener(new ToggleButton.OnCheckedChangeListener(){
@@ -96,7 +96,7 @@ public class BehaviorMdfTVActivity extends AppCompatActivity{
         behavior_current_days = intent.getIntExtra("Behavior_days",8);
         behavior_current_switch = intent.getBooleanExtra("Behavior_switch",false);
         behavior_current_time = intent.getStringExtra("Behavior_time");
-        behavior_current_power = intent.getStringExtra("Behavior_power");
+        behavior_current_power = intent.getIntExtra("Behavior_power",-1);
         behavior_current_channel = intent.getStringExtra("Behavior_channel");
         behavior_current_volume = intent.getStringExtra("Behavior_volume");
 
@@ -117,12 +117,11 @@ public class BehaviorMdfTVActivity extends AppCompatActivity{
         editText_volume.setText(behavior_current_volume);
 
         //현재 파워 체크
-        ToggleButton button_power= (ToggleButton)findViewById(R.id.toggleButton_tv);
-        if(behavior_current_power.equals("1")){
-            button_power.setChecked(true);
+        if(behavior_current_power==1){
+            toggle_power.setChecked(true);
         }
         else{
-            button_power.setChecked(false);
+            toggle_power.setChecked(false);
         }
 
         //현재 요일 체크하기

@@ -296,7 +296,28 @@ public class TVBehaviorlistActivity extends AppCompatActivity {
             txt_pname.setOnClickListener(mOnClickListener);
 
             TextView txt_day = (TextView) convertView.findViewById(R.id.text_days);
-            txt_day.setText(String.valueOf(arSrc.get(position).Days));
+            if(arSrc.get(position).Days==0){
+                txt_day.setText("Sunday");
+            }
+            else if(arSrc.get(position).Days==1){
+                txt_day.setText("Monday");
+            }
+            else if(arSrc.get(position).Days==2){
+                txt_day.setText("Tuesday");
+            }
+            else if(arSrc.get(position).Days==3){
+                txt_day.setText("Wednsday");
+            }
+            else if(arSrc.get(position).Days==4){
+                txt_day.setText("Thursday");
+            }
+            else if(arSrc.get(position).Days==5){
+                txt_day.setText("Friday");
+            }
+            else if(arSrc.get(position).Days==6){
+                txt_day.setText("Saturday");
+            }
+
             txt_day.setOnClickListener(mOnClickListener);
 
             final Switch switch_b = (Switch) convertView.findViewById(R.id.switch_behavior);
@@ -321,7 +342,7 @@ public class TVBehaviorlistActivity extends AppCompatActivity {
                     if(isChecked)
                     {
                         //DB behavior_switch 1로 기록필요
-                        mythread= new switch_thread(arSrc.get(pos).pName,1);
+                        mythread= new switch_thread(arSrc.get(pos).pName,1,arSrc.get(pos).Time,arSrc.get(pos).Days);
                         mythread.setDaemon(true);//액티비티종료시 같이 종료
                         mythread.start();
                         msg=handle.obtainMessage();
@@ -331,7 +352,7 @@ public class TVBehaviorlistActivity extends AppCompatActivity {
                     }
                     else {
                         //DB behavior_switch 0으로 기록필요
-                        mythread= new switch_thread(arSrc.get(pos).pName,0);
+                        mythread= new switch_thread(arSrc.get(pos).pName,0,arSrc.get(pos).Time,arSrc.get(pos).Days);
                         mythread.setDaemon(true);//액티비티종료시 같이 종료
                         mythread.start();
                         msg=handle.obtainMessage();
@@ -350,15 +371,19 @@ public class TVBehaviorlistActivity extends AppCompatActivity {
     class switch_thread extends Thread {
         private String behavior_name_thread;
         private int behavior_switch_thread;
-        public switch_thread(String behavior_name_thread,int behavior_switch_thread){
+        private String behavior_time_thread;
+        private int behavior_days_thread;
+        public switch_thread(String behavior_name_thread,int behavior_switch_thread,String behavior_time, int behavior_days){
             this.behavior_name_thread=behavior_name_thread;
             this.behavior_switch_thread=behavior_switch_thread;
+            this.behavior_time_thread=behavior_time;
+            this.behavior_days_thread=behavior_days;
         }
         @Override
         public void run(){
             try {
                 String behaviorswitch_url=getString(R.string.db_url);
-                behaviorswitch_url+="behaviorlist_switch.php";
+                behaviorswitch_url+="behaviorSwitchTV.php";
                 URL url = new URL(behaviorswitch_url);
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 con.setConnectTimeout(20000);
@@ -370,6 +395,8 @@ public class TVBehaviorlistActivity extends AppCompatActivity {
                 con.setRequestProperty("Cache-Control", "no-cache");
                 String post = URLEncoder.encode("Name", "UTF-8") + "=" + URLEncoder.encode(behavior_name_thread, "UTF-8");
                 post += "&" + URLEncoder.encode("St", "UTF-8") + "=" + behavior_switch_thread;
+                post += "&" + URLEncoder.encode("Time", "UTF-8") + "=" + behavior_time_thread;
+                post += "&" + URLEncoder.encode("Days", "UTF-8") + "=" + behavior_days_thread;
                 OutputStream outputStream = con.getOutputStream();
                 outputStream.write(post.getBytes());
                 outputStream.flush();

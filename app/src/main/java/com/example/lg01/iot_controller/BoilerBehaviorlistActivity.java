@@ -290,7 +290,29 @@ public class BoilerBehaviorlistActivity extends AppCompatActivity {
             txt_pname.setOnClickListener(mOnClickListener);
 
             TextView txt_day = (TextView) convertView.findViewById(R.id.text_days);
-            txt_day.setText(String.valueOf(arSrc.get(position).Days));
+
+            if(arSrc.get(position).Days==0){
+                txt_day.setText("Sunday");
+            }
+            else if(arSrc.get(position).Days==1){
+                txt_day.setText("Monday");
+            }
+            else if(arSrc.get(position).Days==2){
+                txt_day.setText("Tuesday");
+            }
+            else if(arSrc.get(position).Days==3){
+                txt_day.setText("Wednsday");
+            }
+            else if(arSrc.get(position).Days==4){
+                txt_day.setText("Thursday");
+            }
+            else if(arSrc.get(position).Days==5){
+                txt_day.setText("Friday");
+            }
+            else if(arSrc.get(position).Days==6){
+                txt_day.setText("Saturday");
+            }
+
             txt_day.setOnClickListener(mOnClickListener);
 
             final Switch switch_b = (Switch) convertView.findViewById(R.id.switch_behavior);
@@ -356,7 +378,7 @@ public class BoilerBehaviorlistActivity extends AppCompatActivity {
         public void run(){
             try {
                 String behaviorswitch_url=getString(R.string.db_url);
-                behaviorswitch_url+="behaviorlist_switch.php";
+                behaviorswitch_url+="behaviorSwitchBoiler.php";
                 URL url = new URL(behaviorswitch_url);
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 con.setConnectTimeout(20000);

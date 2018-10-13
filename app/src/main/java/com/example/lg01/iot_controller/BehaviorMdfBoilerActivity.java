@@ -29,9 +29,9 @@ public class BehaviorMdfBoilerActivity extends AppCompatActivity{
 
     protected String behavior_current_pname;
     protected int behavior_current_days;
-    protected boolean behavior_current_power;
+    protected int behavior_current_power;
     protected String behavior_current_time;
-    protected int behavior_current_temp;
+    protected String behavior_current_temp;
 
     protected String behavior_new_pname;
     protected int behavior_new_days=8;
@@ -91,9 +91,9 @@ public class BehaviorMdfBoilerActivity extends AppCompatActivity{
 
         behavior_current_pname = intent.getStringExtra("Behavior_pname");
         behavior_current_days = intent.getIntExtra("Behavior_days",8);
-        behavior_current_power = intent.getBooleanExtra("Behavior_power",false);
+        behavior_current_power = intent.getIntExtra("Behavior_power",-1);
         behavior_current_time = intent.getStringExtra("Behavior_time");
-        behavior_current_temp = intent.getIntExtra("Behavior_temp",-1);
+        behavior_current_temp = intent.getStringExtra("Behavior_temp");
 
 
         //현재 이름 올리기
@@ -106,15 +106,14 @@ public class BehaviorMdfBoilerActivity extends AppCompatActivity{
 
         //현재 온도 체크
         EditText editText_temp= (EditText)findViewById(R.id.editText_temperature);
-        editText_temp.setText(behavior_current_temp);
+        editText_temp.setText((behavior_current_temp));
 
         //현재 파워 체크
-        ToggleButton button_power= (ToggleButton)findViewById(R.id.toggleButton_boiler);
-        if(behavior_current_power){
-            button_power.setChecked(true);
+        if(behavior_current_power==1){
+            toggle_power.setChecked(true);
         }
         else{
-            button_power.setChecked(false);
+            toggle_power.setChecked(false);
         }
 
 

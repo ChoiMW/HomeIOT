@@ -35,7 +35,7 @@ public class PopupActivity extends Activity {
     protected int behavior_power;
     protected boolean behavior_switch;
     protected String behavior_time;
-    protected int behavior_temp;
+    protected String behavior_temp;
     protected String behavior_type;
     protected String behavior_channel;
     protected String behavior_volume;
@@ -65,7 +65,7 @@ public class PopupActivity extends Activity {
             behavior_volume = intent.getStringExtra("Behavior_volume");
         }
         else if(behavior_dname.equals("Boiler")){
-            behavior_temp = intent.getIntExtra("Behavior_temp",-1);
+            behavior_temp = intent.getStringExtra("Behavior_temp");
 
         }
         else if(behavior_dname.equals("CM")){
@@ -74,6 +74,7 @@ public class PopupActivity extends Activity {
         else{
             //에어컨일경우
         }
+
 
     }
     //이하  http://ghj1001020.tistory.com/9
@@ -95,12 +96,7 @@ public class PopupActivity extends Activity {
 
     public void mOnClickModify(View v){
         Intent intent= new Intent();
-        intent.putExtra("Behavior_pname", behavior_pname);
-        intent.putExtra("Behavior_dname", behavior_dname);
-        intent.putExtra("Behavior_days", behavior_days);
-        intent.putExtra("Behavior_power", behavior_power);
-        intent.putExtra("Behavior_switch", behavior_switch);
-        intent.putExtra("Behavior_time", behavior_time);
+
 
         if(behavior_dname.equals("TV")){
             intent = new Intent(PopupActivity.this,BehaviorMdfTVActivity.class);
@@ -121,7 +117,12 @@ public class PopupActivity extends Activity {
         else{
             //에어컨일경우
         }
-
+        intent.putExtra("Behavior_pname", behavior_pname);
+        intent.putExtra("Behavior_dname", behavior_dname);
+        intent.putExtra("Behavior_days", behavior_days);
+        intent.putExtra("Behavior_power", behavior_power);
+        intent.putExtra("Behavior_switch", behavior_switch);
+        intent.putExtra("Behavior_time", behavior_time);
         startActivity(intent);
         finish();
 

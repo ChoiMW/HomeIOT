@@ -189,7 +189,6 @@ public class BehaviorAddTVActivity extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        /*
                         Toast.makeText(BehaviorAddTVActivity.this,result,Toast.LENGTH_LONG).show();
                         if (result.equals("Add Success")) {
                             //이전 BehaviorlistActivity를 종료하고
@@ -197,18 +196,6 @@ public class BehaviorAddTVActivity extends AppCompatActivity {
                             endActivity.finish();
                             // 다시 실행한다.
                             Intent intent = new Intent(BehaviorAddTVActivity.this,TVBehaviorlistActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                        */
-
-                        if (result.equals("#!/usr/bin/phpAdd Success")) {
-                            Toast.makeText(BehaviorAddTVActivity.this, "Success", Toast.LENGTH_LONG).show();
-                            //이전 BehaviorlistActivity를 종료하고
-                            TVBehaviorlistActivity endActivity = (TVBehaviorlistActivity) TVBehaviorlistActivity.Behaviorlist;
-                            endActivity.finish();
-                            // 다시 실행한다.
-                            Intent intent = new Intent(BehaviorAddTVActivity.this, TVBehaviorlistActivity.class);
                             startActivity(intent);
                             finish();
                         }

@@ -168,7 +168,7 @@ public class BehaviorAddCoffeeActivity extends AppCompatActivity{
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        /*
+
                         Toast.makeText(BehaviorAddCoffeeActivity.this,result,Toast.LENGTH_LONG).show();
                         if (result.equals("Add Success")) {
                             //이전 BehaviorlistActivity를 종료하고
@@ -179,17 +179,7 @@ public class BehaviorAddCoffeeActivity extends AppCompatActivity{
                             startActivity(intent);
                             finish();
                         }
-                        */
-                        if (result.equals("#!/usr/bin/phpAdd Success")) {
-                            Toast.makeText(BehaviorAddCoffeeActivity.this,"Add Success",Toast.LENGTH_LONG).show();
-                            //이전 BehaviorlistActivity를 종료하고
-                            CMBehaviorlistActivity endActivity=(CMBehaviorlistActivity)CMBehaviorlistActivity.Behaviorlist;
-                            endActivity.finish();
-                            // 다시 실행한다.
-                            Intent intent = new Intent(BehaviorAddCoffeeActivity.this,CMBehaviorlistActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
+
                     }
                 });
             }

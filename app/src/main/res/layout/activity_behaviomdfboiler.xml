@@ -221,8 +221,6 @@
                         android:layout_weight="1"
                         android:ems="10"
                         android:gravity="center"
-                        android:hint="temperature"
-                        android:inputType="number"
                         android:text="0" />
 
                     <ImageButton

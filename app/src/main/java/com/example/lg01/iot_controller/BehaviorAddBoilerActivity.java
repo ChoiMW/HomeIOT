@@ -179,7 +179,7 @@ public class BehaviorAddBoilerActivity extends AppCompatActivity{
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        /*
+
                         Toast.makeText(BehaviorAddBoilerActivity.this,result,Toast.LENGTH_LONG).show();
                         if (result.equals("Add Success")) {
                             //이전 BehaviorlistActivity를 종료하고
@@ -190,19 +190,7 @@ public class BehaviorAddBoilerActivity extends AppCompatActivity{
                             startActivity(intent);
                             finish();
                         }
-                        */
 
-                        if (result.equals("#!/usr/bin/phpAdd Success")) {
-                            Toast.makeText(BehaviorAddBoilerActivity.this,"Add Success",Toast.LENGTH_LONG).show();
-
-                            //이전 BehaviorlistActivity를 종료하고
-                            BoilerBehaviorlistActivity endActivity=(BoilerBehaviorlistActivity)BoilerBehaviorlistActivity.Behaviorlist;
-                            endActivity.finish();
-                            // 다시 실행한다.
-                            Intent intent = new Intent(BehaviorAddBoilerActivity.this,BoilerBehaviorlistActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
                     }
                 });
             }
