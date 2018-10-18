@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "428983541656",
+    "firebase_url": "https://homeiot-cc611.firebaseio.com",
+    "project_id": "homeiot-cc611",
+    "storage_bucket": "homeiot-cc611.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428983541656:android:27eead17a826ab0a",
+        "android_client_info": {
+          "package_name": "com.example.lg01.iot_controller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "428983541656-2bf1o866dsoun8cqnmr26sqkn659udr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDssYvCtVD9VqDpVliUw4LZmRPr7fX3PcY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -16,8 +16,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         button_controliot=(Button)findViewById(R.id.button_controliot);
         button_behaviorlist=(Button)findViewById(R.id.button_behaviorlist);
+
 
         button_controliot.setOnClickListener(new View.OnClickListener() {
             @Override

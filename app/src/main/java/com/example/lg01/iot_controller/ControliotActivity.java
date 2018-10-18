@@ -14,6 +14,7 @@ public class ControliotActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_controliot);
 
         mWebView = (WebView)findViewById(R.id.webview_controliot);
